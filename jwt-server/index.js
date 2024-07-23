@@ -14,7 +14,7 @@ const PUBLIC_KEY_PATH = './public_key.pem';
 
 // Simulate a user in a DB
 const PREDETERMINED_USERNAME = 'David';
-const PREDETERMINED_USER_ID = '1234567891';
+const PREDETERMINED_USER_ID = '1234567';
 
 // Enable CORS for all routes
 app.use(cors());
