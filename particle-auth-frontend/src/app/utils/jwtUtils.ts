@@ -1,6 +1,10 @@
-// jwtUtils.js
-
-export const loginRequest = async (username: string) => {
+/**
+ * Makes a login request to the server with the provided username.
+ * @param {string} username - The username to login with.
+ * @returns {Promise<string|null>} - Returns the JWT token if login is successful, otherwise null.
+ * @throws {Error} - Throws an error if the login request fails.
+ */
+export const loginRequest = async (username: string): Promise<string | null> => {
     const response = await fetch("http://localhost:4000/login", {
       method: "POST",
       headers: {
@@ -22,7 +26,13 @@ export const loginRequest = async (username: string) => {
     return data.token;
   };
   
-  export const decodeJWT = async (token: string) => { // Specify the type of token
+  /**
+   * Decodes and verifies a JWT token.
+   * @param {string} token - The JWT token to decode.
+   * @returns {Promise<Object>} - Returns the decoded payload if the token is valid.
+   * @throws {Error} - Throws an error if the token decoding fails.
+   */
+  export const decodeJWT = async (token: string): Promise<any> => {
     const response = await fetch("http://localhost:4000/decode", {
       method: "POST",
       headers: {
