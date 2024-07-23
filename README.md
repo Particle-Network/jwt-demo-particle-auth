@@ -13,6 +13,8 @@ Demo application showcasing how to use custom JWT authentication with Particle A
 
 This repository demonstrates how to integrate JSON Web Tokens (JWTs) with Particle Auth to create a secure and efficient authentication system for your dApp. By leveraging JWTs, this app ensures stateless and scalable user authentication, enabling seamless login experiences for users.
 
+> Find the full tutorial on the Particle Network's docs: [tutorial here]()
+
 ## Features
 
 - **JWT Generation**: Create and manage JWTs using a custom server.
@@ -20,6 +22,14 @@ This repository demonstrates how to integrate JSON Web Tokens (JWTs) with Partic
 - **Secure Key Management**: Utilize RSA keys for signing and verifying JWTs.
 - **Integration with Particle Auth**: Connect JWT-based authentication to Particle Auth for robust user management.
 - **JWT Decoding**: Extract and display user information from JWTs.
+
+The server includes a simulated user in a database.
+
+```js
+// Simulate a user in a DB
+const PREDETERMINED_USERNAME = 'David';
+const PREDETERMINED_USER_ID = '1234567';
+```
 
 ## 🔑 Particle Auth Core
 
