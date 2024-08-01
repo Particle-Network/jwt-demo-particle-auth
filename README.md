@@ -13,7 +13,7 @@ Demo application showcasing how to use custom JWT authentication with Particle A
 
 This repository demonstrates how to integrate JSON Web Tokens (JWTs) with Particle Auth to create a secure and efficient authentication system for your dApp. By leveraging JWTs, this app ensures stateless and scalable user authentication, enabling seamless login experiences for users.
 
-> Find the full tutorial on the Particle Network's docs: [tutorial here]()
+> Find the full tutorial on the Particle Network's docs: [Custom Authentication via JWT ](https://developers.particle.network/resources/quickstart/customization/jwt)
 
 ## Features
 
@@ -64,12 +64,12 @@ node index
 
 ### Configure the Particle Dashboard
 
-Follow the instructions in the tutorial: [tutorial here]()
+Follow the instructions in the tutorial: [Custom Authentication via JWT ](https://developers.particle.network/resources/quickstart/customization/jwt)
 
 ### Move into the front-end directory (Next JS)
 
 ```sh
-cd particle-next-starter
+cd particle-auth-frontend
 ```
 
 ### Install dependencies
@@ -104,3 +104,5 @@ yarn dev
 ## Development Next JS
 
 Particle Auth config is in `src/app/layout.tsx`. 
+
+Edit the app from `src/app/page.tsx`. 
