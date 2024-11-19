@@ -7,7 +7,7 @@ import {
   useEthereum,
   useConnect,
   useAuthCore,
-} from "@particle-network/auth-core-modal";
+} from "@particle-network/authkit";
 import { ethers, type Eip1193Provider } from "ethers"; // Eip1193Provider is the interface for the injected BrowserProvider
 
 // UI component to display links to the Particle sites
@@ -70,14 +70,16 @@ const Home: NextPage = () => {
       const token = await loginRequest(username);
 
       if (token) {
+        const decodedData = await decodeJWT(token);
+        // console.log(decodedData);
         // Use the returned JWT to connect with Particle Auth
         if (!userInfo) {
           await connect({
-            jwt: token,
+            provider: "jwt",
+            thirdpartyCode: token,
           });
         }
 
-        const decodedData = await decodeJWT(token);
         setJwtData(decodedData);
       }
     } catch (error) {
@@ -205,7 +207,7 @@ const Home: NextPage = () => {
                 Address: <code>{truncateAddress(address || "")}</code>
               </h2>
               <h3 className="text-lg mb-2 text-gray-400">
-                Chain: {chainInfo.fullname}
+                Chain: {chainInfo.name}
               </h3>
               <div className="flex items-center">
                 <h3 className="text-lg font-semibold text-purple-400 mr-2">
@@ -253,7 +255,7 @@ const Home: NextPage = () => {
               {transactionHash && (
                 <TxNotification
                   hash={transactionHash}
-                  blockExplorerUrl={chainInfo.blockExplorerUrl}
+                  blockExplorerUrl={chainInfo.blockExplorers?.default.url || ""}
                 />
               )}
             </div>
