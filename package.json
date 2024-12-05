@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@particle-network/authkit": "^2.0.19",
+    "viem": "2"
+  }
+}

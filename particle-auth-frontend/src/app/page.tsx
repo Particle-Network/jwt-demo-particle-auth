@@ -8,6 +8,7 @@ import {
   useConnect,
   useAuthCore,
 } from "@particle-network/authkit";
+import { AuthType } from "@particle-network/auth-core";
 import { ethers, type Eip1193Provider } from "ethers"; // Eip1193Provider is the interface for the injected BrowserProvider
 
 // UI component to display links to the Particle sites
@@ -75,7 +76,7 @@ const Home: NextPage = () => {
         // Use the returned JWT to connect with Particle Auth
         if (!userInfo) {
           await connect({
-            provider: "jwt",
+            provider: AuthType.jwt,
             thirdpartyCode: token,
           });
         }
