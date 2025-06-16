@@ -101,6 +101,78 @@ Or
 yarn dev
 ```
 
+## Google Auth via JWT with Particle
+
+The main demo showcases how to implement JWT auth from scratch by running your own JWT server. You can also use providers like Google, GitHub, etc. to generate JWTs and use them with Particle Auth.
+
+The following example shows how to implement Google auth via JWT with Particle Auth.
+
+1. **Google OAuth Integration**: The application uses `@react-oauth/google` to implement Google Sign-In functionality.
+
+Generate your Google OAuth client ID and secret from the [Google Cloud Console](https://console.cloud.google.com/). 
+
+Add the following environment variables to your `.env` file:
+
+```sh
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id
+```
+
+Then set up the layout.tsx file in the `src/app/layout.tsx` file:
+
+```tsx
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
+const inter = Inter({ subsets: ["latin"] });
+
+import { ParticleAuthkit } from "@/app/components/Authkit";
+
+export const metadata: Metadata = {
+  title: "Particle Auth App",
+  description: "An application leveraging Particle Auth for social logins.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <GoogleOAuthProvider
+          clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
+        >
+          <ParticleAuthkit>{children}</ParticleAuthkit>
+        </GoogleOAuthProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+2. **JWT Processing**: When a user successfully authenticates with Google, the application receives a JWT token from Google's OAuth service.
+
+3. **JWT Decoding**: The application uses `jwt-decode` to extract user information from the token (name, email, etc.).
+
+4. **Particle Auth Connection**: The JWT token is passed to Particle's Auth system using:
+   ```javascript
+   await connect({
+     provider: AuthType.jwt,
+     thirdpartyCode: token,
+   });
+   ```
+
+  You can find a full demo in the `src/app/google_example.tsx` file.
+
+5. **Wallet Creation**: Particle uses this JWT to authenticate the user and create or access their wallet.
+
+6. **User Experience**: Once authenticated, users can view their wallet address, balance, and perform blockchain actions like signing messages.
+
+
 ## Development Next JS
 
 Particle Auth config is in `src/app/layout.tsx`. 
